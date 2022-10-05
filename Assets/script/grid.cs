@@ -33,7 +33,7 @@ public class grid : MonoBehaviour
                 inc = 0;
                 for (int x = 0; x <26; x++)
                 {
-                    var node = Instantiate(_nodePrefab, new Vector2((x*0.75f)-5,y*0.75f), Quaternion.identity);
+                    var node = Instantiate(_nodePrefab, new Vector2((x*0.75f),y*0.75f), Quaternion.identity);
                     node.updateChar(inc,y);
                     inc+=1;
                 }
@@ -48,7 +48,7 @@ public class grid : MonoBehaviour
                 inc = 0;
                 for (int x = 0; x <5; x++)
                 {
-                    var node = Instantiate(_nodePrefab, new Vector2((x*0.75f),y*0.75f+-1), Quaternion.identity);
+                    var node = Instantiate(_nodePrefab, new Vector2((x*0.75f)+3,y*0.75f), Quaternion.identity);
                    // node.updateChar(inc,y);
                    // inc+=1;
                 }

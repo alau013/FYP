@@ -22,7 +22,15 @@ public class cryptoAlgo : MonoBehaviour
     {
         plainText = inputField.GetComponent<Text>().text;
         plainText = plainText.ToLower();
-        textCleaner(plainText);
+       if(textCleaner(plainText))
+       {
+        Debug.Log("HI");
+        VigenereCipher(plainText,key);
+       }
+       else{
+        Debug.Log("BYE");
+       }
+
 
     }
     public void CaesarCipher(string plainText)
@@ -59,24 +67,41 @@ public class cryptoAlgo : MonoBehaviour
         int counter =0;
         int ptLenght = plaintext.Length;
 
-        for(int i = 0; i <99 ;i++)
+        for(int i = 0; i <ptLenght ;i++)
         {
-            
-           if (i%2==0)
-           {
-            Debug.Log("Hi");
-           }
+         for( int j=0; j<key.Length; j++)
+            {
+                int lettershift;
+                if (counter == plaintext.Length){
+                    break;
+                }
+               if (plaintext[counter] == (char)32)
+                {
+                    encryptedtext += (char)32;
+                    counter++;
+                 }
+                lettershift = ((int)key[j] - (int)alphabet[0]);
+                lettershift = ((int)plaintext[counter]+ lettershift);
+                if(lettershift > (int)'z')
+                {
+                    lettershift -= 26;
+                }
+                encryptedtext += (char)lettershift;
+                counter++;  
+                Debug.Log("encrypted text is: " + encryptedtext);
+            }
             
         }
     }
 
-    public void textCleaner(string str)
+    public bool textCleaner(string str)
     {
         string regularEx = "^[ A-Za-z]+$";
         Match m = Regex.Match(str,regularEx);
         if (m.Success)
         {
-            VigenereCipher(str,key);
+            return true;
         }
+        return false;
     }
 }

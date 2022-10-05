@@ -930,6 +930,8 @@ MonoBehaviour:
   plainText: 
   inputField: {fileID: 967086105}
   textDisplay: {fileID: 775581729}
+  alphabet: abcdefghijklmnopqrstuvwxyz
+  key: abc
 --- !u!4 &1680699856
 Transform:
   m_ObjectHideFlags: 0
