@@ -1,0 +1,50 @@
+{
+    "question": [
+        {
+            "name" : "apple",
+            "type" : "fruit"
+        },
+        {
+            "name" : "singapore",
+            "type" : "country"
+        },
+        {
+            "name" : "grape",
+            "type" : "fruit"
+        },
+        {
+            "name" : "finland",
+            "type" : "country"
+        },
+        {
+            "name" : "carrot",
+            "type" : "vegetable"
+        },
+        {
+            "name" : "pumpkin",
+            "type" : "vegetable"
+        },
+        {
+            "name" :"pear",
+            "type" : "fruit"
+        }
+        
+    ],
+    "key" :[
+        {
+            "key" : "fyp"
+        },
+        {
+            "key" : "math"
+        },
+        {
+            "key" : "algo"
+        },
+        {
+            "key" : "cipher"
+        },
+        {
+            "key" : "encrypt"
+        }
+    ]
+}

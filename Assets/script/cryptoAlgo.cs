@@ -57,7 +57,7 @@ public class cryptoAlgo : MonoBehaviour
         textDisplay.GetComponent<Text>().text = "welcome " + encryptedText;
     }
 
-    public void VigenereCipher (string plaintext, string key)
+    public string VigenereCipher (string plaintext, string key)
     {
         
         Debug.Log("Entering vigenere cipher");
@@ -92,6 +92,7 @@ public class cryptoAlgo : MonoBehaviour
             }
             
         }
+        return encryptedtext;
     }
 
     public bool textCleaner(string str)
