@@ -60,9 +60,9 @@ public class cryptoAlgo : MonoBehaviour
     public string VigenereCipher (string plaintext, string key)
     {
         
-        Debug.Log("Entering vigenere cipher");
-        Debug.Log("plaintext: "+ plaintext);
-        Debug.Log("key: "+ key);
+      //  Debug.Log("Entering vigenere cipher");
+      //  Debug.Log("plaintext: "+ plaintext);
+      //  Debug.Log("key: "+ key);
         string encryptedtext ="";
         int counter =0;
         int ptLenght = plaintext.Length;
@@ -88,7 +88,7 @@ public class cryptoAlgo : MonoBehaviour
                 }
                 encryptedtext += (char)lettershift;
                 counter++;  
-                Debug.Log("encrypted text is: " + encryptedtext);
+             //   Debug.Log("encrypted text is: " + encryptedtext);
             }
             
         }
