@@ -17,6 +17,7 @@ public class cryptoAlgo : MonoBehaviour
 
     public string alphabet = "abcdefghijklmnopqrstuvwxyz";
     public string key = "";
+    int shiftvalue;
 
     public void GetPlainText()
     {
@@ -33,15 +34,22 @@ public class cryptoAlgo : MonoBehaviour
 
 
     }
-    public void CaesarCipher(string plainText)
+    public string CaesarCipher(string plainText,string key)
     {
+        for(int k = 0; k < alphabet.Length; k++)
+        {
+                if ( char.Parse(key) == alphabet[k])
+                {
+                    shiftvalue = alphabet.IndexOf(alphabet[k]);
+                }
+        }
         char[] tempChar = plainText.ToCharArray();
         for (int i = 0; i < tempChar.Length; i++)
         {
             char letter = tempChar[i];
             if (letter != ' ')
             {
-                letter = (char)(letter + 1);
+                letter = (char)(letter + shiftvalue);
                 if (letter > 'z')
                 {
                     letter = (char)(letter - 26);
@@ -54,7 +62,8 @@ public class cryptoAlgo : MonoBehaviour
             tempChar[i] = letter;
         }
         string encryptedText = new string(tempChar);
-        textDisplay.GetComponent<Text>().text = "welcome " + encryptedText;
+        return encryptedText;
+       
     }
 
     public string VigenereCipher (string plaintext, string key)
