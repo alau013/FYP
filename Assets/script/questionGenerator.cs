@@ -9,6 +9,7 @@ public class questionGenerator : MonoBehaviour
     
     public jsonReader json;
     public cryptoAlgo algo;
+    public GameObject questionCountObject;
     public string alphabet = "abcdefghijklmnopqrstuvwxyz";
     string plaintext;
     string keyValue;
@@ -17,13 +18,21 @@ public class questionGenerator : MonoBehaviour
     string ptTypeStr;
     string ciphertypeText;
     int randomMode;
+    int questionCount = 0;
+    int maxQuestion = 10;
 
     public void Start() {
         getQuestion();
     }
     public void getQuestion()
     {
+        if(questionCount == maxQuestion)
+        {
+            displayScript.maxHit = true;
+            return;
+        }
 
+        questionCount++;
         // getting plaintext + type from jsondata
         int randomQuestion = Random.Range(0,json.questionLength());  
         plaintext = json.getName(randomQuestion);
@@ -47,6 +56,11 @@ public class questionGenerator : MonoBehaviour
         
     }
 
+    public void updateQuestionCount()
+    {
+        questionCountObject.GetComponent<TextMeshProUGUI>().text = "Question " +questionCount + "/10";
+    }
+
     public string ptQuestion() 
     {
         return plaintext;
@@ -60,6 +74,7 @@ public class questionGenerator : MonoBehaviour
     {
         return ptTypeStr;
     }
+
 
     public string cipherType()
     {
