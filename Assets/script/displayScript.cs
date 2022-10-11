@@ -33,6 +33,9 @@ public class displayScript : MonoBehaviour
     private bool _skipActivated = false;
     public static bool maxHit = false;
 
+    public  AudioSource correctSound;
+    public  AudioSource wrongSound;
+
 
 
    
@@ -114,6 +117,7 @@ public class displayScript : MonoBehaviour
             {
                 imgWrongObject.GetComponent<Image>().enabled = false;
                 imgCorrectObject.GetComponent<Image>().enabled = true;
+                correctSound.Play();
             }
             StartCoroutine(delayCoroutine());
 
@@ -130,8 +134,8 @@ public class displayScript : MonoBehaviour
         else
         {
             StartCoroutine(shake.Shaking());
-            imgWrongObject.GetComponent<Image>().enabled = true;
-            
+            imgWrongObject.GetComponent<Image>().enabled = true;        
+            wrongSound.Play();
             if (_hintOneHalfActive == false &&  _hintTwoHalfActive == false)
             {
                 unlockHintBtn.GetComponent<Button>().interactable = true;

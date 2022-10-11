@@ -26,12 +26,6 @@ public class questionGenerator : MonoBehaviour
     }
     public void getQuestion()
     {
-        if(questionCount == maxQuestion)
-        {
-            displayScript.maxHit = true;
-            return;
-        }
-
         questionCount++;
         // getting plaintext + type from jsondata
         int randomQuestion = Random.Range(0,json.questionLength());  
@@ -53,7 +47,12 @@ public class questionGenerator : MonoBehaviour
             int randomKey = Random.Range(0,json.keyLength()); 
              keyValue =  json.getKey(randomKey);
         }
-        
+
+        if(questionCount == maxQuestion)
+        {
+            displayScript.maxHit = true;
+        }
+        Debug.Log("counnt: "+questionCount);
     }
 
     public void updateQuestionCount()
