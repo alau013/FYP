@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Text.RegularExpressions;
+using System.Linq;
 
 
 /// ====== cryptographic algorithm =========
@@ -104,6 +105,99 @@ public class cryptoAlgo : MonoBehaviour
         return encryptedtext;
     }
 
+    public string TranspositionCipher(string plaintext, string key)
+    {
+        int row,col;
+        string encryptedtext = "";
+        string sortedKey ;
+        char[] plaintextArray = plaintext.ToCharArray();
+        char[] keyArray = key.ToCharArray();
+
+        // getting row and col
+        row = key.Length;
+        col = plaintext.Length/row;
+        if (plaintext.Length % row != 0)
+        {
+            col+=1;
+        }
+        char[,] matrix = new char[col,row];
+
+        // putting plain text into 2x2 matrix
+        int c =0;
+        for (int i= 0; i <col ;i++)
+        {
+            for (int j = 0; j<row; j++)
+            {
+                if( c > plaintext.Length-1){
+                    matrix[i,j] =' ';
+                }
+                else{
+                    matrix[i,j] = plaintextArray[c];
+                }
+                c++;
+            }
+        }
+        sortedKey = sortKey(key);
+
+        // loop thru key to get the matrix text column by column
+        int z =0;      
+        Debug.Log("keylength is "+ sortedKey.Length);
+        for(int n = 0;n < row;n++)
+        {   
+           
+            if(z >= sortedKey.Length)
+            {
+                Debug.Log("breaking............");
+                break;
+            }
+            if(sortedKey[z] == keyArray[n])
+            {
+                Debug.Log("Entering inner loop now");
+                Debug.Log("z counter: "+z + "n counter: "+n);
+
+                for(int o = 0; o<col; o++)
+                {
+                    Debug.Log("matrix is : "+matrix[o,n]);
+                    encryptedtext+= matrix[o,n];
+                }
+                keyArray[n] ='-';
+                z++;
+                n =0;
+                Debug.Log("encryptedText: "+encryptedtext);
+            }
+        }
+        encryptedtext = encryptedtext.Replace(" ", "");
+        return encryptedtext;
+
+    }
+    // sort key in alphbet order
+    public string sortKey (string key)
+    {
+        string sortedString ="";
+        char[] sortedKey = key.ToCharArray();
+        char temp = ' ';  
+            for (int i = 0; i <= sortedKey.Length-1; i++)  
+            {  
+                for (int j = i+1; j < sortedKey.Length; j++)  
+                {  
+                    if (sortedKey[i] > sortedKey[j])  
+                    {  
+                    
+                        temp = sortedKey[i];  
+                        sortedKey[i] = sortedKey[j];  
+                        sortedKey[j] = temp;
+
+                    } 
+                }  
+            }
+
+        for (int k=0; k <= sortedKey.Length-1; k++)
+        {
+            sortedString = sortedString + sortedKey[k];
+        }      
+        return sortedString;
+
+    }
     public bool textCleaner(string str)
     {
         string regularEx = "^[ A-Za-z]+$";

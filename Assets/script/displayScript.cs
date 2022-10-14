@@ -18,6 +18,7 @@ public class displayScript : MonoBehaviour
     public GameObject UserAnswerObject;
     public GameObject imgCorrectObject;
     public GameObject imgWrongObject;
+    //public GameObject ScoreIncreaseAnimationObj;
     public Image skipPanel;
     public questionGenerator questionGenerator;
     public shake shake;
@@ -35,8 +36,6 @@ public class displayScript : MonoBehaviour
 
     public  AudioSource correctSound;
     public  AudioSource wrongSound;
-
-
 
    
 
@@ -76,15 +75,15 @@ public class displayScript : MonoBehaviour
              checkBtn.GetComponent<Button>().interactable = true;
         }
 
+        if (maxHit == true)
+        {
+            resultScript.activateResult();
+        }
+
     }
 
     public void showQuestionAndKey()
     {
-        if (maxHit == true)
-        {
-            resultScript.activateResult();
-            return;
-        }
 
         if (_started == true){
             questionGenerator.getQuestion();

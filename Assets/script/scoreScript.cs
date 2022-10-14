@@ -8,6 +8,7 @@ using TMPro;
 public class scoreScript : MonoBehaviour
 {
     public GameObject scoreObject;
+    public GameObject scoreIncreaseAnimation;
 
     public displayScript displayScript;
     public static int score ;
@@ -27,6 +28,9 @@ public class scoreScript : MonoBehaviour
             pointgain = 0;
         }
         score += pointgain;
+
+        scoreIncreaseAnimation.GetComponent<TextMeshProUGUI>().text = "+"+pointgain;
+        scoreIncreaseAnimation.GetComponent<Animation>().Play("scoreAddAnimation");
         scoreObject.GetComponent<TextMeshProUGUI>().text = "Score: "+ score;
         pointgain = 100;
     }

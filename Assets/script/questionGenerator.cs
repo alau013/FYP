@@ -20,6 +20,7 @@ public class questionGenerator : MonoBehaviour
     int randomMode;
     int questionCount = 0;
     int maxQuestion = 10;
+    int prevNo = -1;
 
     public void Start() {
         getQuestion();
@@ -28,12 +29,16 @@ public class questionGenerator : MonoBehaviour
     {
         questionCount++;
         // getting plaintext + type from jsondata
-        int randomQuestion = Random.Range(0,json.questionLength());  
+        int randomQuestion = Random.Range(0,json.questionLength()); 
+        while (prevNo == randomQuestion)
+        {
+            randomQuestion = Random.Range(0,json.questionLength());
+        }
         plaintext = json.getName(randomQuestion);
         ptTypeStr = json.getType(randomQuestion);
 
         // randomize the mode
-        randomMode = Random.Range(1,3);
+        randomMode = Random.Range(1,4);
         Debug.Log("mode is :" + randomMode);
         if (randomMode == 1)  // Caesar key
         {
@@ -41,7 +46,7 @@ public class questionGenerator : MonoBehaviour
             int randomAlphabet = Random.Range(0,26);
             keyValue = alphabet[randomAlphabet].ToString();
         }
-        else // Vigenere key
+        else // Vigenere and transpostion key
         {
             Debug.Log(message: "enter vigenere key");
             int randomKey = Random.Range(0,json.keyLength()); 
@@ -53,6 +58,7 @@ public class questionGenerator : MonoBehaviour
             displayScript.maxHit = true;
         }
         Debug.Log("counnt: "+questionCount);
+        prevNo = randomQuestion;
     }
 
     public void updateQuestionCount()
@@ -81,9 +87,13 @@ public class questionGenerator : MonoBehaviour
         {
              ciphertypeText= "Caesar Cipher";
         }
-        else
+        else if(randomMode == 2)
         {
             ciphertypeText = "Vigenere Cipher";
+        }
+        else if(randomMode == 3)
+        {
+             ciphertypeText = "Columnar Transposition";
         }
         return ciphertypeText;
     }
@@ -96,10 +106,15 @@ public class questionGenerator : MonoBehaviour
        {
         return algo.CaesarCipher(plaintext,keyValue);
        }
-       else
+       else if(randomMode == 2)
        {
         return algo.VigenereCipher(plaintext,keyValue);
        }
+       else if(randomMode == 3)
+       {
+        return algo.TranspositionCipher(plaintext,keyValue);
+       }
+       return "";
     }
 
 }
