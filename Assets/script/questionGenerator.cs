@@ -104,11 +104,11 @@ public class questionGenerator : MonoBehaviour
        // return algo.VigenereCipher(plaintext,"A");
        if(randomMode == 1)
        {
-        return algo.CaesarCipher(plaintext,keyValue);
+        return algo.CaesarCipher(plaintext,keyValue); 
        }
        else if(randomMode == 2)
        {
-        return algo.VigenereCipher(plaintext,keyValue);
+       return algo.VigenereCipher(plaintext,keyValue);
        }
        else if(randomMode == 3)
        {

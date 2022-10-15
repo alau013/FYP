@@ -25,6 +25,8 @@ public class displayScript : MonoBehaviour
     public scoreScript scoreScript;
     public resultScript resultScript;
 
+    //public GameObject unPauseBtn;
+
     private bool _started = false;
 
     private bool _hintOneActivated = false;
@@ -48,6 +50,7 @@ public class displayScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         scoreScript.resetScore();
         StartCoroutine(displayCoroutine());
        maxHit = false;
@@ -101,9 +104,9 @@ public class displayScript : MonoBehaviour
         displayEncrypted();
         imgCorrectObject.GetComponent<Image>().enabled = false;
         imgWrongObject.GetComponent<Image>().enabled = false;
-        Debug.Log("Plaintext is : "+plaintext);
-        Debug.Log("key is : "+key);
-        Debug.Log("encrypted text is : "+encryptedtext);
+      //  Debug.Log("Plaintext is : "+plaintext);
+      //  Debug.Log("key is : "+key);
+      //  Debug.Log("encrypted text is : "+encryptedtext);
 
     }
 
@@ -117,13 +120,16 @@ public class displayScript : MonoBehaviour
                 imgWrongObject.GetComponent<Image>().enabled = false;
                 imgCorrectObject.GetComponent<Image>().enabled = true;
                 correctSound.Play();
+                displayHint();
+                displayHint2();
+                unlockHintBtn.GetComponentInChildren<TextMeshProUGUI>().text = "unlock hint";
             }
             StartCoroutine(delayCoroutine());
 
             IEnumerator delayCoroutine()
             {
                 scoreScript.updateScore();
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(1.5f);
                 showQuestionAndKey();
                  UserAnswerObject.GetComponent<TMP_InputField>().text = "";
             }

@@ -113,6 +113,9 @@ public class cryptoAlgo : MonoBehaviour
         char[] plaintextArray = plaintext.ToCharArray();
         char[] keyArray = key.ToCharArray();
 
+         Debug.Log("Plaintext is : "+plaintext);
+         Debug.Log("key is : "+key);
+
         // getting row and col
         row = key.Length;
         col = plaintext.Length/row;
@@ -135,15 +138,27 @@ public class cryptoAlgo : MonoBehaviour
                     matrix[i,j] = plaintextArray[c];
                 }
                 c++;
+                
             }
         }
         sortedKey = sortKey(key);
+
+        for (int i= 0; i <col ;i++)
+        {
+            for (int j = 0; j<row; j++)
+            {
+                Debug.Log("matrix ["+i+"]"+"["+j+"]" + " is " + matrix[i,j]);
+            }
+            
+        }
 
         // loop thru key to get the matrix text column by column
         int z =0;      
         Debug.Log("keylength is "+ sortedKey.Length);
         for(int n = 0;n < row;n++)
         {   
+          //  Debug.Log("Outer loop: "+n);
+          //  Debug.Log("sortedKey is: "+ sortedKey[z]+"["+z+"]" + " Keyarray is: " + keyArray[n]+"["+n+"]");
            
             if(z >= sortedKey.Length)
             {
@@ -153,7 +168,7 @@ public class cryptoAlgo : MonoBehaviour
             if(sortedKey[z] == keyArray[n])
             {
                 Debug.Log("Entering inner loop now");
-                Debug.Log("z counter: "+z + "n counter: "+n);
+                Debug.Log("z counter: "+z + " n counter: "+n);
 
                 for(int o = 0; o<col; o++)
                 {
@@ -162,10 +177,11 @@ public class cryptoAlgo : MonoBehaviour
                 }
                 keyArray[n] ='-';
                 z++;
-                n =0;
+                n =-1;
                 Debug.Log("encryptedText: "+encryptedtext);
             }
         }
+        Debug.Log(encryptedtext);
         encryptedtext = encryptedtext.Replace(" ", "");
         return encryptedtext;
 

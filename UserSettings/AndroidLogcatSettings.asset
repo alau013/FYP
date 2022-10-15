@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "R58M70JP7TH",
         "name": "com.DefaultCompany.com.unity.template.mobile2D",
-        "processId": 22550,
+        "processId": 26045,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -72,6 +72,24 @@
             "deviceId": "R58M70JP7TH",
             "name": "com.DefaultCompany.com.unity.template.mobile2D",
             "processId": 22550,
+            "exited": false
+        },
+        {
+            "deviceId": "R58M70JP7TH",
+            "name": "com.DefaultCompany.com.unity.template.mobile2D",
+            "processId": 25528,
+            "exited": false
+        },
+        {
+            "deviceId": "R58M70JP7TH",
+            "name": "com.DefaultCompany.com.unity.template.mobile2D",
+            "processId": 18067,
+            "exited": false
+        },
+        {
+            "deviceId": "R58M70JP7TH",
+            "name": "com.DefaultCompany.com.unity.template.mobile2D",
+            "processId": 26045,
             "exited": false
         }
     ],

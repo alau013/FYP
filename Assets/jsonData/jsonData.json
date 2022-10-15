@@ -5,28 +5,120 @@
             "type" : "fruit"
         },
         {
-            "name" : "singapore",
-            "type" : "country"
+            "name" : "apricot",
+            "type" : "fruit"
         },
         {
             "name" : "grape",
             "type" : "fruit"
         },
         {
-            "name" : "finland",
+            "name" : "banana",
+            "type" : "fruit"
+        },
+        {
+            "name" : "guava",
+            "type" : "fruit"
+        },
+        {
+            "name" : "pumpkin",
+            "type" : "fruit"
+        },
+        {
+            "name" :"lemon",
+            "type" : "fruit"
+        },
+        {
+            "name" : "mango",
+            "type" : "fruit"
+        },
+        {
+            "name" : "orange",
+            "type" : "fruit"
+        },
+        {
+            "name" : "peach",
+            "type" : "fruit"
+        },
+        {
+            "name" : "singapore",
             "type" : "country"
+        },
+        {
+            "name" : "france",
+            "type" : "country"
+        },
+        {
+            "name" : "japan",
+            "type" : "country"
+        },
+        {
+            "name" : "spain",
+            "type" : "country"
+        },
+        {
+            "name" : "switzerland",
+            "type" : "country"
+        },
+        {
+            "name" : "china",
+            "type" : "country"
+        },
+        {
+            "name" : "norway",
+            "type" : "country"
+        },
+        {
+            "name" : "australia",
+            "type" : "country"
+        },
+        {
+            "name" : "philippines",
+            "type" : "country"
+        },
+        {
+            "name" : "germany",
+            "type" : "country"
+        },
+        {
+            "name" : "ginger",
+            "type" : "vegetable"
         },
         {
             "name" : "carrot",
             "type" : "vegetable"
         },
         {
-            "name" : "pumpkin",
+            "name" : "wasabi",
             "type" : "vegetable"
         },
         {
-            "name" :"pear",
-            "type" : "fruit"
+            "name" : "broccoli",
+            "type" : "vegetable"
+        },
+        {
+            "name" : "cabbage",
+            "type" : "vegetable"
+        },
+        {
+            "name" : "cauliflower",
+            "type" : "vegetable"
+        },
+        {
+            "name" : "tomato",
+            "type" : "vegetable"
+        },
+        {
+            "name" : "celery",
+            "type" : "vegetable"
+        },
+        {
+            "name" : "lettuce",
+            "type" : "vegetable"
+        },
+        {
+            "name" : "eggplant",
+            "type" : "vegetable"
         }
         
     ],
@@ -45,6 +137,21 @@
         },
         {
             "key" : "encrypt"
+        },
+        {
+            "key" : "desk"
+        },
+        {
+            "key" : "limit"
+        },
+        {
+            "key" : "price"
+        },
+        {
+            "key" : "extract"
+        },
+        {
+            "key" : "intention"
         }
     ]
 }
