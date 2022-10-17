@@ -38,4 +38,9 @@ public class PauseMenu : MonoBehaviour
         pauseDummy.SetActive(true);
         unPauseBtn.SetActive(false);
     }
+
+    public void hidePauseMenuBtn()
+    {
+        PauseBtn.SetActive(false);
+    }
 }

@@ -35,8 +35,10 @@ public class cryptoAlgo : MonoBehaviour
 
 
     }
+
     public string CaesarCipher(string plainText,string key)
     {
+        // geting shift value of the letter
         for(int k = 0; k < alphabet.Length; k++)
         {
                 if ( char.Parse(key) == alphabet[k])
@@ -44,6 +46,8 @@ public class cryptoAlgo : MonoBehaviour
                     shiftvalue = alphabet.IndexOf(alphabet[k]);
                 }
         }
+
+        // shifting the letter
         char[] tempChar = plainText.ToCharArray();
         for (int i = 0; i < tempChar.Length; i++)
         {
@@ -70,9 +74,6 @@ public class cryptoAlgo : MonoBehaviour
     public string VigenereCipher (string plaintext, string key)
     {
         
-      //  Debug.Log("Entering vigenere cipher");
-      //  Debug.Log("plaintext: "+ plaintext);
-      //  Debug.Log("key: "+ key);
         string encryptedtext ="";
         int counter =0;
         int ptLenght = plaintext.Length;
@@ -138,7 +139,6 @@ public class cryptoAlgo : MonoBehaviour
                     matrix[i,j] = plaintextArray[c];
                 }
                 c++;
-                
             }
         }
         sortedKey = sortKey(key);
@@ -149,17 +149,13 @@ public class cryptoAlgo : MonoBehaviour
             {
                 Debug.Log("matrix ["+i+"]"+"["+j+"]" + " is " + matrix[i,j]);
             }
-            
-        }
-
+        }   
+        
         // loop thru key to get the matrix text column by column
         int z =0;      
         Debug.Log("keylength is "+ sortedKey.Length);
         for(int n = 0;n < row;n++)
         {   
-          //  Debug.Log("Outer loop: "+n);
-          //  Debug.Log("sortedKey is: "+ sortedKey[z]+"["+z+"]" + " Keyarray is: " + keyArray[n]+"["+n+"]");
-           
             if(z >= sortedKey.Length)
             {
                 Debug.Log("breaking............");

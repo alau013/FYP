@@ -15,6 +15,7 @@ public class scoreScript : MonoBehaviour
     public int pointgain = 100;
     public void updateScore()
     {
+        
         if (displayScript.hint1Status() == true && displayScript.hint2Status() == false && displayScript.skipStatus() == false)
         {
             pointgain = 75;

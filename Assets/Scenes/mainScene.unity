@@ -432,7 +432,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +50
+  m_text: +10
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -893,7 +893,7 @@ GameObject:
   - component: {fileID: 269727182}
   - component: {fileID: 269727181}
   m_Layer: 5
-  m_Name: plaintext
+  m_Name: cheatsheet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4202,6 +4202,7 @@ MonoBehaviour:
   masterObj: {fileID: 976938032}
   scoreObj: {fileID: 1758370263}
   scoreScript: {fileID: 42337057}
+  pauseMenu: {fileID: 1220113199}
 --- !u!1 &993446981
 GameObject:
   m_ObjectHideFlags: 0

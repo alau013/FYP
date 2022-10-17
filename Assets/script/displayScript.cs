@@ -50,7 +50,6 @@ public class displayScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
         scoreScript.resetScore();
         StartCoroutine(displayCoroutine());
        maxHit = false;
@@ -87,7 +86,6 @@ public class displayScript : MonoBehaviour
 
     public void showQuestionAndKey()
     {
-
         if (_started == true){
             questionGenerator.getQuestion();
             questionGenerator.updateQuestionCount();
@@ -107,12 +105,12 @@ public class displayScript : MonoBehaviour
       //  Debug.Log("Plaintext is : "+plaintext);
       //  Debug.Log("key is : "+key);
       //  Debug.Log("encrypted text is : "+encryptedtext);
-
+    
     }
 
     public void answerChecker()
     {
-        
+       
         if (userAnswer() == plaintext || _skipActivated == true)
         {
             if (userAnswer() == plaintext)
@@ -120,8 +118,17 @@ public class displayScript : MonoBehaviour
                 imgWrongObject.GetComponent<Image>().enabled = false;
                 imgCorrectObject.GetComponent<Image>().enabled = true;
                 correctSound.Play();
-                displayHint();
-                displayHint2();
+                
+                hintTypetext= questionGenerator.ptType();
+                HintBtn1.GetComponentInChildren<TextMeshProUGUI>().text = (hintTypetext);
+                HintBtn1.GetComponent<Button>().interactable = false;
+
+                unlockHintBtn.GetComponent<Button>().interactable = false; 
+                hintCiphertext= questionGenerator.cipherType();
+                HintBtn2.GetComponentInChildren<TextMeshProUGUI>().text = (hintCiphertext);
+                 HintBtn2.GetComponent<Button>().interactable = false;
+
+                unlockHintBtn.GetComponent<Button>().interactable = false;
                 unlockHintBtn.GetComponentInChildren<TextMeshProUGUI>().text = "unlock hint";
             }
             StartCoroutine(delayCoroutine());
@@ -132,9 +139,7 @@ public class displayScript : MonoBehaviour
                 yield return new WaitForSeconds(1.5f);
                 showQuestionAndKey();
                  UserAnswerObject.GetComponent<TMP_InputField>().text = "";
-            }
-
-            
+            }     
         }
         else
         {
@@ -153,6 +158,7 @@ public class displayScript : MonoBehaviour
                  imgWrongObject.GetComponent<Image>().enabled = false;
             }
         }
+        Debug.Log("answer checker after hint1Status: "+hint1Status() + " hint2status: "+hint2Status()+ " skipstatus: "+skipStatus());
     }
     public void resetHintBtnFunc()
     {

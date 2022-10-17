@@ -42,12 +42,6 @@ public class jsonReader : MonoBehaviour
     {
         myQuestionList = JsonUtility.FromJson<QuestionList>(textJSON.text);
         myKeyList = JsonUtility.FromJson<KeyList>(textJSON.text);
-
-
-      // for (int i = 0; i<myKeyList.key.Length; i++)
-      //  {
-      //    Debug.Log(myKeyList.key[i].key);
-      // }
     }
     public int questionLength() 
     {
