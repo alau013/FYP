@@ -19,15 +19,48 @@ public class questionGenerator : MonoBehaviour
     string ciphertypeText;
     int randomMode;
     int questionCount = 0;
-    int maxQuestion = 10;
+    int maxQuestion = 0;
     int prevNo = -1;
+    int randomchance;
 
     public void Start() {
+      randomchance = 0;
+      int TempLevel = PlayerPrefs.GetInt("gameLevel");
+        if (TempLevel == 1)
+        {
+            maxQuestion = 5;
+        }
+        else if (TempLevel ==2)
+        {
+             maxQuestion = 5;
+        }
+        else if (TempLevel ==3)
+        {
+            maxQuestion = 10;
+        }
+
+        Debug.Log("Entering Level " + TempLevel);
+        Debug.Log("Max question is :" + maxQuestion);
         getQuestion();
     }
     public void getQuestion()
     {
+        randomchance = 0;
         questionCount++;
+
+         if (Random.value < .5)
+            {
+                randomchance = 1;
+            }
+            else{
+                randomchance = 2;
+            }
+
+        if(questionCount == maxQuestion+1)
+        {
+            displayScript.maxHit = true;
+            return;
+        }
         // getting plaintext + type from jsondata
         int randomQuestion = Random.Range(0,json.questionLength()); 
         while (prevNo == randomQuestion)
@@ -53,17 +86,16 @@ public class questionGenerator : MonoBehaviour
              keyValue =  json.getKey(randomKey);
         }
 
-        if(questionCount == maxQuestion)
-        {
-            displayScript.maxHit = true;
-        }
         Debug.Log("counnt: "+questionCount);
         prevNo = randomQuestion;
+
+        Debug.Log(plaintext);
+        Debug.Log(encrypted());
     }
 
     public void updateQuestionCount()
     {
-        questionCountObject.GetComponent<TextMeshProUGUI>().text = "Question " +questionCount + "/10";
+        questionCountObject.GetComponent<TextMeshProUGUI>().text = "Question " +questionCount + "/"+maxQuestion;
     }
 
     public string ptQuestion() 
@@ -78,6 +110,10 @@ public class questionGenerator : MonoBehaviour
     public string ptType()
     {
         return ptTypeStr;
+    }
+    public int RandomMode()
+    {
+      return randomchance;
     }
 
 

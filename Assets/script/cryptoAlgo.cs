@@ -26,11 +26,11 @@ public class cryptoAlgo : MonoBehaviour
         plainText = plainText.ToLower();
        if(textCleaner(plainText))
        {
-        Debug.Log("HI");
+   
         VigenereCipher(plainText,key);
        }
        else{
-        Debug.Log("BYE");
+  
        }
 
 
@@ -114,8 +114,8 @@ public class cryptoAlgo : MonoBehaviour
         char[] plaintextArray = plaintext.ToCharArray();
         char[] keyArray = key.ToCharArray();
 
-         Debug.Log("Plaintext is : "+plaintext);
-         Debug.Log("key is : "+key);
+      //   Debug.Log("Plaintext is : "+plaintext);
+      //   Debug.Log("key is : "+key);
 
         // getting row and col
         row = key.Length;
@@ -147,7 +147,7 @@ public class cryptoAlgo : MonoBehaviour
         {
             for (int j = 0; j<row; j++)
             {
-                Debug.Log("matrix ["+i+"]"+"["+j+"]" + " is " + matrix[i,j]);
+            //    Debug.Log("matrix ["+i+"]"+"["+j+"]" + " is " + matrix[i,j]);
             }
         }   
         
@@ -158,13 +158,13 @@ public class cryptoAlgo : MonoBehaviour
         {   
             if(z >= sortedKey.Length)
             {
-                Debug.Log("breaking............");
+             //   Debug.Log("breaking............");
                 break;
             }
             if(sortedKey[z] == keyArray[n])
             {
-                Debug.Log("Entering inner loop now");
-                Debug.Log("z counter: "+z + " n counter: "+n);
+            //    Debug.Log("Entering inner loop now");
+            //    Debug.Log("z counter: "+z + " n counter: "+n);
 
                 for(int o = 0; o<col; o++)
                 {
@@ -174,10 +174,10 @@ public class cryptoAlgo : MonoBehaviour
                 keyArray[n] ='-';
                 z++;
                 n =-1;
-                Debug.Log("encryptedText: "+encryptedtext);
+             //   Debug.Log("encryptedText: "+encryptedtext);
             }
         }
-        Debug.Log(encryptedtext);
+      //  Debug.Log(encryptedtext);
         encryptedtext = encryptedtext.Replace(" ", "");
         return encryptedtext;
 
