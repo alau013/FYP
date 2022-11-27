@@ -20,12 +20,18 @@ public class displayScript : MonoBehaviour
     public GameObject UserAnswerObject;
     public GameObject imgCorrectObject;
     public GameObject imgWrongObject;
+    public GameObject StageText;
     //public GameObject ScoreIncreaseAnimationObj;
     public Image skipPanel;
     public questionGenerator questionGenerator;
     public shake shake;
     public scoreScript scoreScript;
     public resultScript resultScript;
+
+    public gridMaker gridMaker;
+    public resetBar resetBar;
+
+
 
     //public GameObject unPauseBtn;
 
@@ -37,6 +43,7 @@ public class displayScript : MonoBehaviour
     private bool _hintTwoHalfActive = false;
     private bool _skipActivated = false;
     public static bool maxHit = false;
+    private bool _disableKey = false;
 
     private int _gameLevel;
 
@@ -78,7 +85,7 @@ public class displayScript : MonoBehaviour
     }
 
     void Update() {
-        if (userAnswer() == "")
+        if (userAnswer() == "" || _disableKey == true)
         {
              checkBtn.GetComponent<Button>().interactable = false;
         }
@@ -96,6 +103,7 @@ public class displayScript : MonoBehaviour
     public void showQuestionAndKey()
     {
         if (_started == true){
+           
             questionGenerator.getQuestion();
             resetHintBtnFunc();
             UserAnswerObject.GetComponent<TMP_InputField>().interactable = true;
@@ -103,9 +111,13 @@ public class displayScript : MonoBehaviour
             _skipActivated = false;
             skipAnswerObject.GetComponent<TextMeshProUGUI>().text = "";
             unlockHintBtn.GetComponentInChildren<TextMeshProUGUI>().text = "Unlock Hint";
+            StageText.SetActive(true);
+            resetBar.resetBarfunc();
+            if (_gameLevel == 3)
+            TableHintBtn.SetActive(value: false);
+            TableHintBtnDummy.SetActive(false);
 
-             TableHintBtn.SetActive(value: false);
-        TableHintBtnDummy.SetActive(false);
+            scoreScript.pointScored = 1;
         }
         skipPanel.GetComponent<Image>().enabled = false;
         questionGenerator.updateQuestionCount();
@@ -114,6 +126,10 @@ public class displayScript : MonoBehaviour
         displayQuestion();
         imgCorrectObject.GetComponent<Image>().enabled = false;
         imgWrongObject.GetComponent<Image>().enabled = false;
+
+
+        
+
       //  Debug.Log("Plaintext is : "+plaintext);
       //  Debug.Log("key is : "+key);
       //  Debug.Log("encrypted text is : "+encryptedtext);
@@ -146,6 +162,7 @@ public class displayScript : MonoBehaviour
         else
         {
             StartCoroutine(shake.Shaking());
+            StageText.SetActive(false);
             imgWrongObject.GetComponent<Image>().enabled = true;        
             wrongSound.Play();
             if (_hintOneHalfActive == false &&  _hintTwoHalfActive == false)
@@ -158,6 +175,7 @@ public class displayScript : MonoBehaviour
             {
                 yield return new WaitForSeconds(0.5f);
                  imgWrongObject.GetComponent<Image>().enabled = false;
+                 StageText.SetActive(value: true);
             }
         }
         Debug.Log("answer checker after hint1Status: "+hint1Status() + " hint2status: "+hint2Status()+ " skipstatus: "+skipStatus());
@@ -188,6 +206,8 @@ public class displayScript : MonoBehaviour
             TableHintBtnDummy.GetComponent<Button>().interactable = true;
             _hintOneHalfActive = true;
 
+            scoreScript.pointScored = 2;
+
         }
         else if (_hintOneActivated == true && _hintTwoActivated == false) // show hint 2 btn
         {
@@ -195,13 +215,19 @@ public class displayScript : MonoBehaviour
             HintBtn2.GetComponent<Button>().interactable = true;
             HintBtn2.GetComponentInChildren<TextMeshProUGUI>().text = "Hint 2";
             _hintTwoHalfActive = true;
+
+            scoreScript.pointScored = 3;
         }
         else if (_hintOneActivated == true && _hintTwoActivated == true) //show answer
         {
             UserAnswerObject.GetComponent<TMP_InputField>().interactable = false;
             checkBtn.GetComponentInChildren<TextMeshProUGUI>().text = "Next";
+            StageText.SetActive(false);
+            TableHintBtn.GetComponent<Button>().interactable = false;
+            TableHintBtnDummy.GetComponent<Button>().interactable = false;
             _skipActivated = true;
             skipPanel.GetComponent<Image>().enabled = true;
+            scoreScript.pointScored = 4;
            
            if (_gameLevel ==1)
            {
@@ -263,19 +289,27 @@ public class displayScript : MonoBehaviour
         if (_gameLevel == 1) // show plaintext, find encrypted
         {
             Questiontext = questionGenerator.ptQuestion();
+            StageText.GetComponent<TextMeshProUGUI>().text = "Find the encrypted text"; 
+            TableView.gamelevelTable = 1;
         }
         else if(_gameLevel == 2) // show encrypted, find plaintext
         {
             Questiontext = questionGenerator.encrypted();
+            StageText.GetComponent<TextMeshProUGUI>().text = "Find the plain text";
+            TableView.gamelevelTable = 2;
         }
         else if(_gameLevel == 3) // random
         {
              if (questionGenerator.RandomMode() == 1)
              {
                 Questiontext = questionGenerator.ptQuestion();
+                StageText.GetComponent<TextMeshProUGUI>().text = "Find the encrypted text";
+                TableView.gamelevelTable = 1;
              }
              else if (questionGenerator.RandomMode() == 2){
                 Questiontext = questionGenerator.encrypted();
+                StageText.GetComponent<TextMeshProUGUI>().text = "Find the plain text";
+                TableView.gamelevelTable = 2;
              }
         }
         EncryptedTextObject.GetComponent<TextMeshProUGUI>().text = (Questiontext);
@@ -283,12 +317,14 @@ public class displayScript : MonoBehaviour
 
     public void userCorrect()
     {
+        _disableKey = true;
         if (_skipActivated == false)
         {
             imgWrongObject.GetComponent<Image>().enabled = false;
-        imgCorrectObject.GetComponent<Image>().enabled = true;
-        correctSound.Play();
+            imgCorrectObject.GetComponent<Image>().enabled = true;
+            correctSound.Play();
         }
+        StageText.SetActive(false);
         displayHint();
         displayHint2();
         unlockHintBtn.GetComponentInChildren<TextMeshProUGUI>().text = "unlock hint";
@@ -301,12 +337,20 @@ public class displayScript : MonoBehaviour
                 yield return new WaitForSeconds(1.5f);
                 showQuestionAndKey();
                  UserAnswerObject.GetComponent<TMP_InputField>().text = "";
+                 _disableKey = false;
             }     
 }
     
     public void displayHint()
     {
         hintTypetext= questionGenerator.cipherType();
+        if (hintTypetext == "Columnar Transposition")
+        {
+            TableView.tabletype = 2;
+        }
+        else{
+            TableView.tabletype = 1;
+        }
         HintBtn1.GetComponentInChildren<TextMeshProUGUI>().text = (hintTypetext);
         HintBtn1.GetComponent<Button>().interactable = false;
         HintBtn1.SetActive(false);

@@ -14,19 +14,29 @@ public class TableView : MonoBehaviour
     public GameObject SubmitDummy;
     public GameObject PauseBtn;
     public GameObject PauseDummy;
+    public GameObject VTable;
+    public GameObject TCTable;
 
     public GameObject bar;
+    public gridMaker gridMaker;
     private bool _bar = false;
+    public static int tabletype; //1 = vigenere cipher table | 2 =  transposition ciphers table
+    public static int gamelevelTable; // 1 = show encryptedtext hint | 2 = show plaintext hint
 
     // Start is called before the first frame update
-    void Start()
-    {
-      //  tableViewObject.SetActive(false);
-    }
 
     public void closeTableFunc()
     {
         tableViewObject.SetActive(false);
+         if (tabletype == 1)
+        {
+            VTable.SetActive(value: false);
+            
+        }
+        else if( tabletype == 2)
+        {
+            TCTable.SetActive(false);
+        }
        
         PauseBtn.SetActive(true);
         PauseDummy.SetActive(true);
@@ -34,11 +44,22 @@ public class TableView : MonoBehaviour
         SubmitBtn.SetActive(true);
         hintDummy.SetActive(true);
         SubmitDummy.SetActive(true);
+
+    
+
     }
 
     public void openTableFunc()
     {
         tableViewObject.SetActive(true);
+        if (tabletype == 1)
+        {
+            VTable.SetActive(true);
+        }
+        else if( tabletype == 2)
+        {
+            TCTable.SetActive(true);
+        }
 
         PauseBtn.SetActive(false);
         PauseDummy.SetActive(false);
@@ -46,24 +67,8 @@ public class TableView : MonoBehaviour
         SubmitBtn.SetActive(false);
         hintDummy.SetActive(false);
         SubmitDummy.SetActive(false);
+
         
-    }
-
-    public void activateBar()
-    {
-        bar = GameObject.FindGameObjectWithTag("D");
-    
-         if(_bar == true)
-         {
-            bar.SetActive(false);
-             _bar = false;
-         }
-         else{
-             bar.SetActive(true);
-         _bar = true;
-
-         }
-
     }
 
 }

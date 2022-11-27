@@ -12,19 +12,37 @@ public class scoreScript : MonoBehaviour
 
     public displayScript displayScript;
     public static int score ;
-    public int pointgain = 100;
+    public static int pointgain = 100;
+
+    public static int pointScored; // 1 - no hint used || 2 - 1 hint used || 3 - 2 hint used ||
     public void updateScore()
     {
         
-        if (displayScript.hint1Status() == true && displayScript.hint2Status() == false && displayScript.skipStatus() == false)
+        // if (displayScript.hint1Status() == true && displayScript.hint2Status() == false && displayScript.skipStatus() == false)
+        // {
+        //     pointgain = 75;
+        // }
+        // else if(displayScript.hint1Status() == true && displayScript.hint2Status() == true && displayScript.skipStatus() == false)
+        // {
+        //     pointgain = 50;
+        // }
+        // else if (displayScript.hint1Status() == true && displayScript.hint2Status() == true && displayScript.skipStatus() == true )
+        // {
+        //     pointgain = 0;
+        // }
+        if (pointScored == 1)
+        {
+            pointgain = 100;
+        }
+        else if(pointScored == 2)
         {
             pointgain = 75;
         }
-        else if(displayScript.hint1Status() == true && displayScript.hint2Status() == true && displayScript.skipStatus() == false)
+        else if(pointScored == 3)
         {
             pointgain = 50;
         }
-        else if (displayScript.hint1Status() == true && displayScript.hint2Status() == true && displayScript.skipStatus() == true )
+        else if(pointScored == 4)
         {
             pointgain = 0;
         }
@@ -45,4 +63,5 @@ public class scoreScript : MonoBehaviour
     {
         score = 0;
     }
+
 }

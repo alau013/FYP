@@ -106,7 +106,7 @@ public class cryptoAlgo : MonoBehaviour
         return encryptedtext;
     }
 
-    public string TranspositionCipher(string plaintext, string key)
+    public static string TranspositionCipher(string plaintext, string key)
     {
         int row,col;
         string encryptedtext = "";
@@ -178,12 +178,12 @@ public class cryptoAlgo : MonoBehaviour
             }
         }
       //  Debug.Log(encryptedtext);
-        encryptedtext = encryptedtext.Replace(" ", "");
+       // encryptedtext = encryptedtext.Replace(" ", "");
         return encryptedtext;
 
     }
     // sort key in alphbet order
-    public string sortKey (string key)
+    public static string sortKey (string key)
     {
         string sortedString ="";
         char[] sortedKey = key.ToCharArray();

@@ -93,6 +93,73 @@ public class questionGenerator : MonoBehaviour
         Debug.Log(encrypted());
     }
 
+    public void getQuestionDev() ///// for presentation demo
+    {
+        string  key;
+        string encryptedtext;
+        randomchance = 0;
+        questionCount++;
+
+         if (Random.value < .5)
+            {
+                randomchance = 1;
+            }
+            else{
+                randomchance = 2;
+            }
+
+        if(questionCount == maxQuestion+1)
+        {
+            displayScript.maxHit = true;
+            return;
+        }
+
+        if (questionCount == 1)
+        {
+            plaintext = "apple";
+            keyValue = "fyp";
+            randomMode = 2;
+            encryptedtext = encrypted();
+        }
+        else if (questionCount == 2)
+        {
+            plaintext = "carrot";
+            keyValue = "e";
+            randomMode = 1;
+            encryptedtext = encrypted();
+        }
+         else if (questionCount == 3)
+        {
+            plaintext = "cabbage";
+            keyValue = "algo";
+            randomMode = 3;
+            encryptedtext = encrypted();
+        }
+         else if (questionCount == 4)
+        {
+            plaintext = "norway";
+            keyValue = "limit";
+            randomMode = 3;
+            encryptedtext = encrypted();
+        }
+         else if (questionCount == 5)
+        {
+            plaintext = "pear";
+            keyValue = "cipher";
+            randomMode = 2;
+            encryptedtext = encrypted();
+        }
+         else if (questionCount == 6)
+        {
+            plaintext = "apple";
+            keyValue = "math";
+            randomMode = 1;
+            encryptedtext = encrypted();
+        }
+    
+    }
+
+
     public void updateQuestionCount()
     {
         questionCountObject.GetComponent<TextMeshProUGUI>().text = "Question " +questionCount + "/"+maxQuestion;
@@ -148,7 +215,10 @@ public class questionGenerator : MonoBehaviour
        }
        else if(randomMode == 3)
        {
-        return algo.TranspositionCipher(plaintext,keyValue);
+        string text;
+         text = cryptoAlgo.TranspositionCipher(plaintext,keyValue);
+         text = text.Replace(" ", "");
+         return text;
        }
        return "";
     }
